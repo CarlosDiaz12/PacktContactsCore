@@ -8,6 +8,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using PacktContactsCore.Data;
+using PacktContactsCore.Interfaces;
+using PacktContactsCore.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,6 +31,7 @@ namespace PacktContactsCore
         {
             services.AddControllers();
             services.AddDbContext<ContactsDbContext>(opts => opts.UseSqlServer(Configuration.GetConnectionString("PacktContactsConnString")));
+            services.AddScoped<IContactRepository, ContactRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
